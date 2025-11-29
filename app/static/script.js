@@ -651,7 +651,36 @@ function openPolicyModal(policy) {
   
   if (modal && title && content) {
     title.textContent = `Policy: ${policy.name || 'Untitled'}`;
-    content.textContent = JSON.stringify(policy, null, 2);
+    
+    // Defensive parsing: handle rules as string or object
+    let parsedPolicy = { ...policy };
+    if (parsedPolicy.rules !== undefined) {
+      try {
+        // If rules is a string, parse it; otherwise use as-is
+        parsedPolicy.rules = typeof parsedPolicy.rules === "string" 
+          ? JSON.parse(parsedPolicy.rules) 
+          : parsedPolicy.rules;
+      } catch (e) {
+        // If parsing fails, show error and keep original
+        console.error('Failed to parse policy rules JSON:', e);
+        showToast('Invalid JSON in policy rules', 'error');
+        parsedPolicy.rules = parsedPolicy.rules; // Keep original
+      }
+    }
+    
+    // Handle missing rules
+    if (!parsedPolicy.rules || (Array.isArray(parsedPolicy.rules) && parsedPolicy.rules.length === 0)) {
+      parsedPolicy.rules = "No rules";
+    }
+    
+    try {
+      content.textContent = JSON.stringify(parsedPolicy, null, 2);
+    } catch (e) {
+      console.error('Failed to stringify policy:', e);
+      content.textContent = 'Error displaying policy JSON';
+      showToast('Failed to display policy JSON', 'error');
+    }
+    
     modal.setAttribute('aria-hidden', 'false');
   }
 }
