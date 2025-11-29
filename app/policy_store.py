@@ -94,12 +94,20 @@ class PolicyStore:
         version = policy_dict.get("version")
         for rule in rules:
             rule_roles = rule.get("roles", [])
-            rule_tool = rule.get("tool_id")
+            # Handle both "tool_id" and "tool" fields (backwards compatible)
+            rule_tool = rule.get("tool_id") or rule.get("tool")
+            if not rule_tool:
+                continue
             if not set(roles).intersection(rule_roles):
                 continue
             normalized_targets = {rule_tool}
-            if isinstance(rule_tool, str) and rule_tool.startswith("mcp:"):
-                normalized_targets.add(rule_tool.split("mcp:", 1)[1])
+            # If rule_tool doesn't have "mcp:" prefix, add it for matching
+            if isinstance(rule_tool, str):
+                if rule_tool.startswith("mcp:"):
+                    normalized_targets.add(rule_tool.split("mcp:", 1)[1])
+                else:
+                    # If tool doesn't have mcp: prefix, also try with it
+                    normalized_targets.add(f"mcp:{rule_tool}")
             if tool_id not in normalized_targets:
                 continue
             conditions = rule.get("conditions", {})
