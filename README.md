@@ -385,7 +385,7 @@ This project is licensed under the MIT License — see [LICENSE](LICENSE) file f
 
 **Your Name**  
 Computer Science Student @ RV University | Cybersecurity & AI/ML Enthusiast  
-[GitHub](https://github.com/yourusername) | [LinkedIn](https://linkedin.com/in/yourprofile)
+[GitHub]([https://github.com/yourusername](https://github.com/CodeMaestroRishit)) | [LinkedIn](www.linkedin.com/in/rishit-guha-419684278)
 
 ---
 
