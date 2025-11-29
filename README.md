@@ -399,9 +399,7 @@ Computer Science Student @ RV University | Cybersecurity & AI/ML Enthusiast
 
 ## 📞 Support
 
-- 📧 Email: your.email@example.com
-- 🐛 Issues: [GitHub Issues](https://github.com/yourusername/apexguard/issues)
-- 💬 Discussions: [GitHub Discussions](https://github.com/yourusername/apexguard/discussions)
+- 📧 Email: rishitguha0824@gmail.com
 
 ---
 
