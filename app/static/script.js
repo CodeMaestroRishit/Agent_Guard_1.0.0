@@ -1,4 +1,4 @@
-// AgentGuard Dashboard - Unified JavaScript
+// ApexGuard Dashboard - Unified JavaScript
 const BASE_URL = (window && window.location && window.location.origin) 
   ? window.location.origin 
   : "http://localhost:5073";
@@ -157,11 +157,11 @@ function initSidebar() {
   if (toggle && sidebar) {
     toggle.addEventListener('click', () => {
       const collapsed = sidebar.classList.toggle('collapsed');
-      localStorage.setItem('agentguard_sidebar_collapsed', collapsed);
+      localStorage.setItem('apexguard_sidebar_collapsed', collapsed);
     });
     
     // Restore collapsed state
-    const saved = localStorage.getItem('agentguard_sidebar_collapsed');
+    const saved = localStorage.getItem('apexguard_sidebar_collapsed');
     if (saved === 'true') {
       sidebar.classList.add('collapsed');
     }
